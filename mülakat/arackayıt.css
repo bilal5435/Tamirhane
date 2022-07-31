@@ -1,0 +1,50 @@
+body{
+    background-color: aliceblue;
+     margin: 0%;
+     padding: 0%;
+     text-align: -webkit-center;
+ }
+ .container{
+     border:none;
+     width: 500px;
+     height: 500px;
+     margin: 200px;
+     
+ }
+ #input{
+     border: 1px solid green;
+     border-radius: 3px;
+     padding: 5px;
+     margin: 8px;
+   
+ } 
+ #btn{
+     font-size: large;
+     cursor: pointer;
+     border-radius: 3px;
+     color: white;
+     background-color: blue;
+     width: 100px;
+     padding: 0%;
+ }
+ #btn:hover{
+     color: black;
+     
+ }
+ .header{
+    text-align: left;
+    border-bottom: double;
+ }
+ .add{
+     text-align-last:  center;
+     cursor: pointer;
+     vertical-align: top;
+     padding: 80px;
+     cursor: pointer;
+     padding: 60px;
+     margin: 20px;
+     font-size: 15px;
+ }
+ .add:hover{
+     color:blue
+ }
