@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  background-color: rgba(183, 189, 199, 0.627);
+  width: 400px;
+  height: 250px;
+  border: 1px solid rgb(0, 0, 0);
+  padding: 40px;
+  margin: 100px;
+  border-radius: 1px;
+  text-align-last: center;
+}
+#btn {
+  margin: 10px;
+  font-size: large;
+}
+#btn:hover {
+  color: blue;
+}
+#input {
+  color: black;
+}
