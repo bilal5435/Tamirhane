@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Yeni kayıt</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div w3-include-html="components/header.html"></div>
+
+    <div class="container-card">
+      <h1>Müşteri ve Araç kayıt sistemi</h1>
+      <form id="create-form" onsubmit="event.preventDefault(); create();">
+        <input
+          type="text"
+          id="input"
+          maxlength="10"
+          placeholder="ad"
+          name="name"
+        />
+        <input
+          type="text"
+          id="input"
+          maxlength="10"
+          placeholder="soyad"
+          name="surname"
+        />
+        <input
+          type="text"
+          id="input"
+          maxlength="11"
+          placeholder="telefon"
+          name="phone"
+        />
+        <input
+          type="text"
+          id="input"
+          maxlength="25"
+          placeholder="e-posta"
+          name="email"
+        /><br />
+        <input
+          type="text"
+          id="input"
+          maxlength="25"
+          placeholder="Araç Markası giriniz..."
+          name="carBrand"
+        />
+        <input
+          type="text"
+          id="input"
+          maxlength="25"
+          placeholder="Araç Plakası giriniz..."
+          name="carPlate"
+        />
+        <input
+          type="text"
+          id="input"
+          maxlength="25"
+          placeholder="Araç Modeli giriniz..."
+          name="carModel"
+        />
+        <input
+          type="text"
+          id="input"
+          maxlength="25"
+          placeholder="Araç Model Yılı giriniz..."
+          name="carModelYear"
+        />
+
+        <div class="form-group">
+          <button type="submit" id="btn">Kaydet</button>
+        </div>
+      </form>
+    </div>
+    <script src="main.js"></script>
+    <script>
+      includeHTML();
+
+      const form = document.getElementById("create-form");
+      const localstr = localStorage.getItem("appointments");
+      let appointments = [];
+
+      function create() {
+        if (localstr != null) {
+          appointments = JSON.parse(localstr);
+        }
+
+        const name = form.elements.name.value;
+        const surname = form.elements.surname.value;
+        const phone = form.elements.phone.value;
+        const email = form.elements.email.value;
+        const carBrand = form.elements.carBrand.value;
+        const carPlate = form.elements.carPlate.value;
+        const carModel = form.elements.carModel.value;
+        const carModelYear = form.elements.carModelYear.value;
+        const appointmentDate = new Date();
+        const appointment = {
+          id: appointments.length + 1 + "",
+          name,
+          surname,
+          phone,
+          email,
+          carBrand,
+          carPlate,
+          carModel,
+          carModelYear,
+          appointmentDate,
+          isApprove: false,
+        };
+
+        appointments.push(appointment);
+
+        localStorage.setItem("appointments", JSON.stringify(appointments));
+      }
+    </script>
+  </body>
+</html>

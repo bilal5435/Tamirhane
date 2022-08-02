@@ -7,13 +7,71 @@
     <title>Randevu</title>
     <link rel="stylesheet" href="style.css" />
   </head>
-
   <body>
-   <div w3-include-html="components/header.html"></div>
-      <h1>Randevu İşlemleri</h1>
-      <table>
-        <tr>
-          <th colspan="">ad</th>
+    <div w3-include-html="components/header.html"></div>
+
+    <h1>Randevu İşlemleri</h1>
+
+    <table id="appointment-table"></table>
+
+    <script src="main.js"></script>
+    <script>
+      includeHTML();
+
+      const table = document.getElementById("appointment-table");
+      const localStr = localStorage.getItem("appointments");
+      let appointments = [];
+
+      if (localStr != null) {
+        appointments = JSON.parse(localStr);
+      } else {
+        appointments = [
+          {
+            id: "1",
+            name: "Ahmet",
+            surname: "Yılmaz",
+            phone: "0555555555",
+            email: "asdasdasdad",
+            carBrand: "Mercedes",
+            carPlate: "ASDASDASD",
+            carModel: "C class",
+            carModelYear: "2020",
+            appointmentDate: "2020-01-01",
+            isApprove: false,
+          },
+          {
+            id: "2",
+            name: "Ahmet",
+            surname: "Yılmaz",
+            phone: "0555555555",
+            email: "asdasdasdad",
+            carBrand: "Mercedes",
+            carPlate: "ASDASDASD",
+            carModel: "C class",
+            carModelYear: "2020",
+            appointmentDate: "2020-01-01",
+            isApprove: false,
+          },
+          {
+            id: "3",
+            name: "Ahmet",
+            surname: "Yılmaz",
+            phone: "0555555555",
+            email: "asdasdasdad",
+            carBrand: "Mercedes",
+            carPlate: "ASDASDASD",
+            carModel: "C class",
+            carModelYear: "2020",
+            appointmentDate: "2020-01-01",
+            isApprove: false,
+          },
+        ];
+      }
+
+      function init() {
+        table.innerHTML = `
+          <tr>
+          <th>ad</th>
           <th>soyad</th>
           <th>telefon</th>
           <th>e-posta</th>
@@ -22,73 +80,56 @@
           <th>Araç Modeli</th>
           <th>Araç Model Yılı</th>
           <th>Muayene Tarihi Seçiniz:</th>
+          <th>Islem</th>
         </tr>
-        <tr>
-          <td>Jill</td>
-          <td>Smith</td>
-          <td>05443571451</td>
-          <td>akbasbilal114@gmail.com</td>
-          <td>Jill</td>
-          <td>Smith</td>
-          <td>05443571451</td>
-          <td>akbasbilal114@gmail.com</td>
-          <td><input type="date" id="birthday" /></td>
-          <td><button type="button" id="btn"onclick="Function()">Onayla</button></td>
-        </tr>
-        <tr>
-          <td>Jill</td>
-          <td>Smith</td>
-          <td>05443571451</td>
-          <td>akbasbilal114@gmail.com</td>
-          <td>Jill</td>
-          <td>Smith</td>
-          <td>05443571451</td>
-          <td>akbasbilal114@gmail.com</td>
-          <td><input type="date" id="birthday" /></td>
-          <td><button type="button" id="btn">Onayla</button></td>
-        </tr>
-        <tr>
-          <td>Jill</td>
-          <td>Smith</td>
-          <td>05443571451</td>
-          <td>akbasbilal114@gmail.com</td>
-          <td>Jill</td>
-          <td>Smith</td>
-          <td>05443571451</td>
-          <td>akbasbilal114@gmail.com</td>
-          <td><input type="date" id="birthday" /></td>
-          <td><button type="button" id="btn">Onayla</button></td>
-        </tr>
-        <tr>
-          <td>Jill</td>
-          <td>Smith</td>
-          <td>05443571451</td>
-          <td>akbasbilal114@gmail.com</td>
-          <td>Jill</td>
-          <td>Smith</td>
-          <td>05443571451</td>
-          <td>akbasbilal114@gmail.com</td>
-          <td><input type="date" id="birthday" /></td>
-          <td><button type="button" id="btn">Onayla</button></td>
-        </tr>
-        
-        <tr>
-          <td>Jill</td>
-          <td>Smith</td>
-          <td>05443571451</td>
-          <td>akbasbilal114@gmail.com</td>
-          <td>Jill</td>
-          <td>Smith</td>
-          <td>05443571451</td>
-          <td>akbasbilal114@gmail.com</td>
-          <td><input type="date" id="birthday" /></td>
-          <td><button type="button" id="btn">Onayla</button></td>
-        </tr>
-      </table>
-    </div>
-    <script src="main.js"></script>
-    <script>
-      includeHTML();
+        `;
+        appointments.map((p) => {
+          const tr = document.createElement("tr");
+          tr.id = p.id;
+          tr.innerHTML = `
+          <td>${p.name}</td>
+          <td>${p.surname}</td>
+          <td>${p.phone}</td>
+          <td>${p.email}</td>
+          <td>${p.carBrand}</td>
+          <td>${p.carPlate}</td>
+          <td>${p.carModel}</td>
+          <td>${p.carModelYear}</td>
+          <td>${p.appointmentDate}</td>
+        `;
+
+          const td = document.createElement("td");
+          const btn = document.createElement("button");
+
+          if (p.isApprove) {
+            btn.innerHTML = "Iptal";
+            btn.className = "btn-reject";
+            btn.onclick = () => {
+              changeStatus(p.id);
+            };
+          } else {
+            btn.innerHTML = "Onayla";
+            btn.className = "btn-approve";
+            btn.onclick = () => {
+              changeStatus(p.id);
+            };
+          }
+
+          td.appendChild(btn);
+          tr.appendChild(td);
+
+          table.appendChild(tr);
+        });
+
+        localStorage.setItem("appointments", JSON.stringify(appointments));
+      }
+
+      init();
+
+      function changeStatus(id) {
+        appointments[id - 1].isApprove = !appointments[id - 1].isApprove;
+        init();
+      }
     </script>
   </body>
 </html>

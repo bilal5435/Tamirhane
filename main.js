@@ -7,13 +7,6 @@ function myFunction() {
 function $() {
   alert("Silmek istediğinize emin misiniz?");
 }
-function Function() {
-  var btn = document.createElement("INPUT");
-  btn.setAttribute("type", "button");
-  btn.setAttribute("value", "İptal Et");
-  document.body.appendChild(btn);
-  alert("onaylandı");
-}
 
 function includeHTML() {
   var z, i, elmnt, file, xhttp;
